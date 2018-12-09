@@ -13,6 +13,7 @@ public class Calculator extends JFrame {
     double result ;
     String operations;
     String answer;
+    int stringSize;
     double i[] = new double [5]; 
     
     JTextField field1;
@@ -85,11 +86,11 @@ public class Calculator extends JFrame {
         btn3[1].addActionListener(handle);
         btn3[2].addActionListener(handle);
         btn4[0].addActionListener(handle);
-        btn4[1].addActionListener(handle);
-        btn4[2].addActionListener(handle);
-        btn5[0].addActionListener(handle);
-        btn5[1].addActionListener(handle);
-        btn5[2].addActionListener(handle);
+        btn4[1].addActionListener(handle); //+btn
+        btn4[2].addActionListener(handle); //-btn
+        btn5[0].addActionListener(handle); //=btn
+        btn5[1].addActionListener(handle);  //dividebtn
+        btn5[2].addActionListener(handle); //*btn
     }
     
      
@@ -140,29 +141,38 @@ public class Calculator extends JFrame {
                 field1.setText(Enternumber);
             }
             else if(e.getSource() == btn5[2]){
-                fnum = Double.parseDouble(field1.getText());
-                field1.setText("");
-                operations = "*";   
+               fnum = Double.parseDouble(field1.getText());
+                String s=field1.getText();
+                stringSize=s.length();
+                field1.setText(field1.getText()+"x");
+                operations=("*");  
             }
             else if(e.getSource() == btn4[1]){
                 fnum = Double.parseDouble(field1.getText());
-                field1.setText("");
+                String s=field1.getText();
+                stringSize=s.length();
+                field1.setText(field1.getText()+"+");
                 operations=("+");  
             }
             else if(e.getSource() == btn4[2]){
                 fnum = Double.parseDouble(field1.getText());
-                field1.setText("");
+                String s=field1.getText();
+                stringSize=s.length();
+                field1.setText(field1.getText()+"-");
                 operations=("-");  
             }
             else if(e.getSource() == btn5[1]){
-                fnum = Double.parseDouble(field1.getText());
-                field1.setText("");
-                operations=("/");  
+                 fnum = Double.parseDouble(field1.getText());
+                String s=field1.getText();
+                stringSize=s.length();
+                field1.setText(field1.getText()+"/");
+                operations=("/");   
             }
             
             else if(e.getSource() == btn5[0]){
                 //=
-                snum = Double.parseDouble(field1.getText());
+                String str=field1.getText();
+                snum = Double.parseDouble(str.substring(stringSize+1, str.length()));
                 field1.setText(" ");
                 if(operations == "+"){
                     result =  (fnum + snum);
